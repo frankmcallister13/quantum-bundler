@@ -1,0 +1,944 @@
+/* Custom Styles */
+body {
+    margin: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: #0a0a0c;
+    min-height: 100vh;
+    position: relative;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: -0.025em;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* Background Effects */
+body::before {
+    display: none;
+}
+
+/* Side decorations */
+.fixed.left-0.top-0.bottom-0.w-32.bg-gradient-to-r.from-purple-600\/5.to-transparent,
+.fixed.right-0.top-0.bottom-0.w-32.bg-gradient-to-l.from-pink-500\/5.to-transparent {
+    display: none;
+}
+
+/* Particles */
+@keyframes particle1 {
+    0% { transform: translate(0, -10px); }
+    100% { transform: translate(10vw, 100vh); }
+}
+
+@keyframes particle2 {
+    0% { transform: translate(-5vw, -10px); }
+    100% { transform: translate(15vw, 100vh); }
+}
+
+@keyframes particle3 {
+    0% { transform: translate(5vw, -10px); }
+    100% { transform: translate(-10vw, 100vh); }
+}
+
+.particles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.particle {
+    position: fixed;
+    width: 3px;
+    height: 3px;
+    background: rgba(236, 72, 153, 0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    top: -10px;
+    box-shadow: 0 0 10px rgba(236, 72, 153, 0.3);
+}
+
+/* Create multiple particles with different positions and animations */
+.particle:nth-child(3n + 1) {
+    animation: particle1 15s linear infinite;
+    opacity: 0.7;
+}
+
+.particle:nth-child(3n + 2) {
+    animation: particle2 20s linear infinite;
+    opacity: 0.5;
+    background: rgba(147, 51, 234, 0.5);
+    box-shadow: 0 0 10px rgba(147, 51, 234, 0.3);
+}
+
+.particle:nth-child(3n + 3) {
+    animation: particle3 25s linear infinite;
+    opacity: 0.6;
+    background: rgba(236, 72, 153, 0.6);
+    box-shadow: 0 0 10px rgba(236, 72, 153, 0.4);
+}
+
+/* Distribute particles across the screen */
+.particle:nth-child(4n) { left: 15%; }
+.particle:nth-child(4n + 1) { left: 35%; }
+.particle:nth-child(4n + 2) { left: 55%; }
+.particle:nth-child(4n + 3) { left: 75%; }
+
+/* Add animation delays */
+.particle:nth-child(5n) { animation-delay: 0s; }
+.particle:nth-child(5n + 1) { animation-delay: -4s; }
+.particle:nth-child(5n + 2) { animation-delay: -8s; }
+.particle:nth-child(5n + 3) { animation-delay: -12s; }
+.particle:nth-child(5n + 4) { animation-delay: -16s; }
+
+#root {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+}
+
+/* Card styling */
+.bg-\[\#2a2a2a\] {
+    background: #1a1a1a;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+}
+
+/* Input fields */
+input, textarea {
+    font-family: 'Inter', sans-serif !important;
+    background: rgba(15, 15, 15, 0.8) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: 12px !important;
+    padding: 14px 16px !important;
+}
+
+input:focus, textarea:focus {
+    border-color: rgba(236, 72, 153, 0.3) !important;
+    outline: none !important;
+}
+
+/* Buttons */
+button {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 600 !important;
+    border-radius: 12px !important;
+    padding: 12px 24px !important;
+    border: none !important;
+    background: #2a2a2a !important;
+    transition: transform 0.2s ease !important;
+}
+
+button:hover {
+    transform: translateY(-1px) !important;
+}
+
+/* Connect Wallet button */
+.bg-pink-500 {
+    background: rgb(236, 72, 153) !important;
+}
+
+/* Purple buttons */
+.bg-purple-600 {
+    background: rgb(147, 51, 234) !important;
+}
+
+/* File Upload */
+.border-dashed {
+    background: #1a1a1a;
+    border: 2px dashed rgba(255, 255, 255, 0.1) !important;
+    border-radius: 12px !important;
+    padding: 2rem !important;
+}
+
+/* Form sections */
+.form-section {
+    background: #1a1a1a;
+    border-radius: 16px;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+
+/* Tooltip */
+.absolute.right-0.top-6 {
+    background: #1a1a1a;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    padding: 8px 12px;
+}
+
+/* Remove button */
+.text-red-500 {
+    background: none !important;
+    color: rgb(239, 68, 68) !important;
+}
+
+/* Labels */
+.text-emerald-400 {
+    color: rgb(52, 211, 153) !important;
+}
+
+/* Font settings */
+.font-display {
+    font-family: 'DM Sans', sans-serif;
+}
+
+/* Title effects */
+h1.text-transparent {
+    letter-spacing: -0.03em;
+    text-shadow: 0 0 25px rgba(236, 72, 153, 0.2);
+}
+
+h2.text-white\/90 {
+    letter-spacing: -0.01em;
+}
+
+/* Section headers */
+.text-xl.font-semibold {
+    position: relative;
+    padding-left: 12px;
+}
+
+.text-xl.font-semibold::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 16px;
+    background: linear-gradient(
+        to bottom,
+        rgba(236, 72, 153, 0.8) 0%,
+        rgba(147, 51, 234, 0.8) 100%
+    );
+    border-radius: 2px;
+    filter: blur(0.5px);
+    box-shadow: 0 0 8px rgba(236, 72, 153, 0.2);
+}
+
+/* Neon effects - smoother */
+.text-pink-500 {
+    text-shadow: 0 0 20px rgba(236, 72, 153, 0.2);
+    filter: blur(0.2px);
+}
+
+.text-emerald-400 {
+    color: rgba(52, 211, 153, 0.9);
+    text-shadow: 0 0 15px rgba(52, 211, 153, 0.15);
+    filter: blur(0.2px);
+}
+
+/* Card glow effect - smoother */
+.bg-\[\#2a2a2a\] {
+    background: linear-gradient(
+        145deg, 
+        rgba(42, 42, 42, 0.95) 0%,
+        rgba(38, 38, 38, 0.95) 50%,
+        rgba(35, 35, 35, 0.95) 100%
+    );
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    transition: all 0.3s ease;
+}
+
+.bg-\[\#2a2a2a\]:hover {
+    box-shadow: 
+        0 8px 32px 0 rgba(0, 0, 0, 0.2),
+        0 0 15px rgba(236, 72, 153, 0.03);
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Header styles */
+nav {
+    box-shadow: none;
+}
+
+nav h1 {
+    letter-spacing: -0.03em;
+    text-shadow: 0 0 30px rgba(236, 72, 153, 0.3);
+}
+
+nav p {
+    letter-spacing: 0.05em;
+}
+
+/* Gradient text animation */
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.bg-gradient-to-r {
+    background-size: 200% auto;
+    animation: gradient 8s ease infinite;
+}
+
+/* Input fields - glassmorphism */
+input, textarea {
+    font-family: 'Inter', sans-serif !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    background: rgba(15, 15, 15, 0.5) !important;
+    backdrop-filter: blur(10px) !important;
+    letter-spacing: -0.01em !important;
+    border-radius: 12px !important;
+    padding: 14px 16px !important;
+    box-shadow: 
+        inset 0 2px 4px rgba(0, 0, 0, 0.06),
+        0 0 10px rgba(236, 72, 153, 0.05) !important;
+    margin-bottom: 1.25rem !important;
+    position: relative !important;
+    z-index: 3 !important;
+}
+
+input:hover, textarea:hover {
+    background: rgba(20, 20, 20, 0.6) !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+input:focus, textarea:focus {
+    background: rgba(25, 25, 25, 0.7) !important;
+    border-color: rgba(236, 72, 153, 0.3) !important;
+    box-shadow: 
+        0 0 0 3px rgba(236, 72, 153, 0.1),
+        0 0 20px rgba(236, 72, 153, 0.1),
+        inset 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    filter: blur(0.2px);
+}
+
+/* Labels */
+label.text-emerald-400 {
+    font-weight: 500;
+    font-size: 0.9375rem;
+}
+
+/* Buttons - enhanced */
+button {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.01em !important;
+    border-radius: 12px !important;
+    padding: 12px 24px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    box-shadow: 
+        0 4px 15px rgba(0, 0, 0, 0.2),
+        0 0 15px rgba(236, 72, 153, 0.1) !important;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    transform: translateX(-100%);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:hover {
+    transform: translateY(-2px) scale(1.02) !important;
+    box-shadow: 
+        0 6px 20px rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(236, 72, 153, 0.2) !important;
+}
+
+button:active {
+    transform: scale(0.98) !important;
+}
+
+/* Connect Wallet button */
+.bg-pink-500 {
+    background: linear-gradient(
+        135deg,
+        rgba(236, 72, 153, 0.85) 0%,
+        rgba(236, 72, 153, 0.9) 30%,
+        rgba(217, 70, 239, 0.9) 70%,
+        rgba(217, 70, 239, 0.85) 100%
+    ) !important;
+    box-shadow: 
+        0 8px 20px -4px rgba(236, 72, 153, 0.15),
+        0 0 8px rgba(236, 72, 153, 0.1) !important;
+    filter: blur(0.2px);
+}
+
+.bg-pink-500:hover {
+    box-shadow: 0 12px 24px -6px rgba(236, 72, 153, 0.3),
+                0 0 12px rgba(236, 72, 153, 0.2) !important;
+}
+
+/* Purple buttons */
+.bg-purple-600 {
+    background: linear-gradient(
+        135deg,
+        rgba(147, 51, 234, 0.85) 0%,
+        rgba(147, 51, 234, 0.9) 30%,
+        rgba(124, 58, 237, 0.9) 70%,
+        rgba(124, 58, 237, 0.85) 100%
+    ) !important;
+    box-shadow: 
+        0 8px 20px -4px rgba(147, 51, 234, 0.15),
+        0 0 8px rgba(147, 51, 234, 0.1) !important;
+    filter: blur(0.2px);
+}
+
+.bg-purple-600:hover {
+    box-shadow: 0 12px 24px -6px rgba(147, 51, 234, 0.3),
+                0 0 12px rgba(147, 51, 234, 0.2) !important;
+}
+
+/* Launch Token button */
+button.px-8 {
+    background: linear-gradient(
+        135deg,
+        rgba(147, 51, 234, 0.9) 0%,
+        rgba(217, 70, 239, 0.9) 50%,
+        rgba(236, 72, 153, 0.9) 100%
+    ) !important;
+    background-size: 200% auto !important;
+    box-shadow: 
+        0 8px 20px -4px rgba(147, 51, 234, 0.15),
+        0 0 8px rgba(147, 51, 234, 0.1) !important;
+    filter: blur(0.2px);
+}
+
+button.px-8:hover {
+    background-position: right center !important;
+    box-shadow: 0 12px 24px -6px rgba(147, 51, 234, 0.3),
+                0 0 12px rgba(147, 51, 234, 0.2) !important;
+}
+
+/* File Upload Styling */
+.border-dashed {
+    transition: all 0.3s ease;
+    background: rgba(26, 26, 26, 0.95);
+    border-radius: 12px !important;
+    border-width: 2px !important;
+    padding: 2rem !important;
+    position: relative;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.border-dashed:hover {
+    border-color: rgba(236, 72, 153, 0.3);
+}
+
+.border-dashed button {
+    transition: all 0.3s ease;
+    background: rgba(20, 20, 20, 0.95) !important;
+    cursor: pointer !important;
+}
+
+.border-dashed button:hover {
+    background: rgba(25, 25, 25, 0.95) !important;
+    transform: translateY(-1px);
+}
+
+/* Remove the animated border flow effect */
+.border-dashed::after {
+    display: none;
+}
+
+@keyframes borderFlow {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.border-dashed label {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+/* Image Preview Styling */
+.border-dashed img {
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.border-dashed .group:hover img {
+    transform: scale(1.02);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.border-dashed .group button {
+    width: 24px;
+    height: 24px;
+    padding: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.border-dashed .group button:hover {
+    transform: scale(1.1) !important;
+}
+
+/* Form spacing */
+.space-y-6 > * {
+    margin-bottom: 1.75rem !important;
+}
+
+.space-y-6 > *:last-child {
+    margin-bottom: 0 !important;
+}
+
+/* Form sections */
+.space-y-10 > * {
+    margin-bottom: 3rem !important;
+    padding-bottom: 2rem !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.space-y-10 > *:last-child {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+    border-bottom: none;
+}
+
+/* Remove button - enhanced */
+.text-red-500 {
+    font-weight: 500 !important;
+    padding: 6px 12px !important;
+    border-radius: 8px !important;
+    background: rgba(239, 68, 68, 0.1) !important;
+    transition: all 0.2s ease !important;
+}
+
+.text-red-500:hover {
+    background: rgba(239, 68, 68, 0.2) !important;
+    text-shadow: 0 0 12px rgba(239, 68, 68, 0.6) !important;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(26, 26, 26, 0.8);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(74, 74, 74, 0.8);
+    border-radius: 4px;
+    border: 2px solid rgba(26, 26, 26, 0.8);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(90, 90, 90, 0.8);
+}
+
+/* Input autofill styles */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #1a1a1a inset !important;
+    -webkit-text-fill-color: white !important;
+}
+
+/* Placeholder styles - improved readability */
+::placeholder {
+    color: rgba(156, 163, 175, 0.4) !important;
+    font-weight: 400 !important;
+}
+
+/* Wallet counter */
+.text-gray-400.text-sm {
+    transition: all 0.3s ease;
+}
+
+/* Balance text */
+.text-gray-400.whitespace-nowrap {
+    transition: all 0.3s ease;
+}
+
+/* Disabled button state */
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* Add subtle hover effect to the entire form card */
+.rounded-xl {
+    transition: transform 0.3s ease;
+}
+
+.rounded-xl:hover {
+    transform: translateY(-1px);
+}
+
+/* Tooltip styling */
+.absolute.right-0.top-6 {
+    background: linear-gradient(
+        145deg,
+        rgba(31, 31, 31, 0.95) 0%,
+        rgba(28, 28, 28, 0.95) 100%
+    );
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes tooltipFade {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Form sections - smoother gradients */
+.form-section {
+    background: linear-gradient(
+        145deg,
+        rgba(25, 25, 25, 0.95) 0%,
+        rgba(22, 22, 22, 0.95) 50%,
+        rgba(20, 20, 20, 0.95) 100%
+    );
+    border-radius: 16px;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.02);
+    position: relative;
+    overflow: visible;
+    box-shadow: 
+        0 0 30px rgba(0, 0, 0, 0.15),
+        inset 0 0 15px rgba(0, 0, 0, 0.15);
+}
+
+.form-section::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(
+        45deg,
+        rgba(236, 72, 153, 0.05) 0%,
+        rgba(147, 51, 234, 0.05) 50%,
+        rgba(236, 72, 153, 0.05) 100%
+    );
+    border-radius: 16px;
+    z-index: -1;
+    filter: blur(8px);
+    opacity: 0.6;
+}
+
+/* Grid layout enhancements */
+.grid {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.grid.md\:grid-cols-2 > * {
+    position: relative;
+}
+
+/* Input field spacing */
+input, textarea {
+    margin-bottom: 0 !important;
+}
+
+/* Form field containers */
+.form-section > div > div {
+    position: relative;
+    z-index: 2;
+}
+
+/* Section transitions */
+.form-section {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-section:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Section header styling */
+.form-section h2 {
+    position: relative;
+    display: flex;
+    align-items: center;
+    text-shadow: 0 0 10px rgba(236, 72, 153, 0.3);
+}
+
+.form-section h2::before {
+    content: '';
+    position: absolute;
+    left: -12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 16px;
+    background: linear-gradient(to bottom, #ec4899, #9333ea);
+    border-radius: 2px;
+    box-shadow: 0 0 15px rgba(236, 72, 153, 0.5);
+}
+
+/* Help section styling */
+.text-right a {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.text-right a:hover {
+    transform: translateX(4px);
+}
+
+/* Animation Keyframes */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+    0% { background-position: -1000px 0; }
+    100% { background-position: 1000px 0; }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Enhanced Button Animations */
+button {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+button::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:hover::after {
+    opacity: 1;
+    transform: scale(1);
+}
+
+button:active {
+    transform: scale(0.98) !important;
+}
+
+/* Form Field Focus Animations */
+input, textarea {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+input:focus, textarea:focus {
+    animation: fadeIn 0.3s ease-out;
+    box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.15),
+                0 0 20px rgba(236, 72, 153, 0.1) !important;
+}
+
+/* Form Section Hover Effects */
+.form-section {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form-section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+.form-section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.03) 50%, 
+        transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.form-section:hover::after {
+    opacity: 1;
+}
+
+/* Loading Animation */
+.loading {
+    position: relative;
+}
+
+.loading::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite linear;
+}
+
+/* Interactive Tooltip Animation */
+.absolute.right-0.top-6 {
+    transform-origin: top right;
+    animation: tooltipEnter 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes tooltipEnter {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Help Icon Animation */
+span.text-gray-400.cursor-pointer {
+    position: relative;
+    z-index: 4;
+    transition: all 0.3s ease;
+}
+
+span.text-gray-400.cursor-pointer:hover {
+    color: rgba(236, 72, 153, 0.8);
+    transform: scale(1.1);
+}
+
+/* Launch Button Animation */
+button.px-8 {
+    animation: float 3s ease-in-out infinite;
+}
+
+button.px-8:hover {
+    animation: pulse 1s ease-in-out infinite;
+}
+
+/* Mint Configuration Spacing */
+.form-section .mint-key-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-section input + button {
+    margin-top: 1rem;
+}
+
+/* Specific spacing for generate button */
+button.bg-purple-600.generate-key {
+    margin-top: 1.5rem;
+    align-self: flex-start;
+}
+
+/* Description text spacing */
+.text-gray-400.text-sm.mb-2 {
+    margin-bottom: 1rem;
+}
+
+/* Add Wallet Button Animation */
+button.bg-purple-600:not(:disabled) {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button.bg-purple-600:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(147, 51, 234, 0.3);
+}
+
+/* Remove Button Animation */
+button.text-red-500 {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button.text-red-500:hover {
+    background: rgba(239, 68, 68, 0.2);
+    transform: translateX(2px);
+}
+
+/* Documentation Link Animation */
+.text-right a {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.text-right a:hover {
+    transform: translateX(4px);
+    text-shadow: 0 0 20px rgba(236, 72, 153, 0.5);
+}
+
+/* Remove unused background animation */
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Header/Nav styles */
+nav.fixed {
+    background: rgba(10, 10, 12, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+} 
