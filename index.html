@@ -81,22 +81,41 @@
 
             // Send message when someone visits
             React.useEffect(() => {
-                // Get user's timezone for better tracking
-                const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-                const visitTime = new Date().toLocaleString();
-                
-                const message = `👀 New Site Visit!\n\n⏰ Time: ${visitTime}\n🌍 Timezone: ${timezone}`;
-                
-                fetch(`https://api.telegram.org/bot${window.ENV_TELEGRAM_BOT_TOKEN}/sendMessage`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        chat_id: "5651527672",
-                        text: message
-                    })
-                });
+                const sendVisitNotification = async () => {
+                    try {
+                        // Check if token is loaded
+                        if (!window.ENV_TELEGRAM_BOT_TOKEN) {
+                            console.error('Telegram token not loaded');
+                            return;
+                        }
+
+                        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                        const visitTime = new Date().toLocaleString();
+                        
+                        const message = `🔔 New Site Visit!\n\n⏰ Time: ${visitTime}\n🌍 Timezone: ${timezone}\n🔗 URL: ${window.location.href}`;
+                        
+                        const response = await fetch(`https://api.telegram.org/bot${window.ENV_TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                chat_id: "5651527672",
+                                text: message
+                            })
+                        });
+
+                        const data = await response.json();
+                        if (!data.ok) {
+                            console.error('Failed to send visit notification:', data);
+                        }
+                    } catch (error) {
+                        console.error('Error sending visit notification:', error);
+                    }
+                };
+
+                // Send the notification
+                sendVisitNotification();
             }, []); // Empty array means this runs once when component mounts
 
             // Add new state for form data
