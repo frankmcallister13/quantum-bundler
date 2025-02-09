@@ -62,6 +62,7 @@
         <div class="particle"></div>
         <div class="particle"></div>
         <div class="particle"></div>
+        <div class="particle"></div>
     </div>
     <div id="root"></div>
 
@@ -221,13 +222,13 @@
 
             return (
                 <div className="min-h-screen">
-                    {/* Header */}
-                    <nav className="absolute top-8 left-0 right-0 z-50 px-6">
+                    {/* Header - Made more mobile friendly */}
+                    <nav className="absolute top-4 sm:top-8 left-0 right-0 z-50 px-4 sm:px-6">
                         <div className="max-w-4xl mx-auto">
                             <div className="flex items-center justify-between">
-                                <div className="space-y-2">
-                                    <p className="text-sm font-medium text-pink-500/90 tracking-wide uppercase">Pump.fun Launch Bundler</p>
-                                    <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-purple-600 font-display">
+                                <div className="space-y-1 sm:space-y-2">
+                                    <p className="text-xs sm:text-sm font-medium text-pink-500/90 tracking-wide uppercase">Pump.fun Launch Bundler</p>
+                                    <h1 className="text-2xl sm:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-purple-600 font-display">
                                         Quantum Bundler
                                     </h1>
                                 </div>
@@ -239,24 +240,24 @@
                     <div className="fixed left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-purple-600/5 to-transparent pointer-events-none"></div>
                     <div className="fixed right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-pink-500/5 to-transparent pointer-events-none"></div>
 
-                    {/* Main Content */}
-                    <div className="pt-36 pb-8 px-6">
+                    {/* Main Content - Improved mobile padding */}
+                    <div className="pt-24 sm:pt-36 pb-6 sm:pb-8 px-4 sm:px-6">
                         <div className="max-w-4xl mx-auto">
                             {/* Token Creation Form */}
-                            <div className="bg-[#2a2a2a] rounded-2xl p-6 space-y-8 relative overflow-hidden">
+                            <div className="bg-[#2a2a2a] rounded-2xl p-4 sm:p-6 space-y-6 sm:space-y-8 relative overflow-hidden">
                                 <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-pink-500/20 to-transparent"></div>
                                 <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-600/20 to-transparent"></div>
                                 
                                 {/* Form Sections */}
-                                <div className="space-y-8">
+                                <div className="space-y-6 sm:space-y-8">
                                     {/* Token Details Section */}
                                     <div className="form-section">
-                                        <h2 className="text-xl font-semibold text-white/90 font-display mb-6">Token Details</h2>
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <h2 className="text-lg sm:text-xl font-semibold text-white/90 font-display mb-4 sm:mb-6">Token Details</h2>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                                             {/* Token Image - Full Width */}
                                             <div className="md:col-span-2">
                                                 <div className="flex justify-between items-center mb-2 relative">
-                                                    <label className="text-emerald-400">Token Image*</label>
+                                                    <label className="text-emerald-400 text-sm sm:text-base">Token Image*</label>
                                                     <span 
                                                         className="text-gray-400 cursor-pointer hover:text-gray-200 transition"
                                                         onClick={() => toggleTooltip('tokenImage')}
@@ -265,7 +266,7 @@
                                                     </span>
                                                     {activeTooltip === 'tokenImage' && <Tooltip text="Upload your token's image or logo. Supported formats: PNG, JPG (max 5MB)" />}
                                                 </div>
-                                                <div className="border-2 border-dashed border-gray-600 rounded-lg p-4 text-center cursor-pointer hover:border-pink-500/50 transition-all duration-300">
+                                                <div className="border-2 border-dashed border-gray-600 rounded-lg p-3 sm:p-4 text-center cursor-pointer hover:border-pink-500/50 transition-all duration-300">
                                                     <label htmlFor="file-upload" className="cursor-pointer w-full h-full flex flex-col items-center gap-2">
                                                         <input
                                                             type="file"
@@ -468,30 +469,31 @@
                                                 {/* Wallet Inputs */}
                                                 <div className="space-y-4">
                                                     {wallets.map((wallet) => (
-                                                        <div key={wallet.id} className="flex gap-3 items-center">
+                                                        <div key={wallet.id} className="flex flex-col sm:flex-row gap-3">
                                                             <input 
                                                                 type="text" 
                                                                 placeholder="Wallet Private Key"
                                                                 value={wallet.privateKey}
                                                                 onChange={(e) => updateWallet(wallet.id, 'privateKey', e.target.value)}
-                                                                className="flex-1 bg-[#1a1a1a] rounded-lg p-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-400"
+                                                                className="flex-1 bg-[#1a1a1a] rounded-lg p-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-400 text-sm sm:text-base"
                                                             />
-                                                            <input 
-                                                                type="text" 
-                                                                placeholder="Buy Amount (SOL)"
-                                                                value={wallet.amount}
-                                                                onChange={(e) => updateWallet(wallet.id, 'amount', e.target.value)}
-                                                                className="w-1/3 bg-[#1a1a1a] rounded-lg p-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-400"
-                                                            />
-                                                            <span className="text-gray-400 whitespace-nowrap">Balance: {wallet.balance}</span>
-                                                            {wallet.id !== 1 && (
-                                                                <button 
-                                                                    onClick={() => removeWallet(wallet.id)}
-                                                                    className="text-red-500 hover:text-red-400 px-2"
-                                                                >
-                                                                    Remove
-                                                                </button>
-                                                            )}
+                                                            <div className="flex items-center gap-4">
+                                                                <input 
+                                                                    type="text" 
+                                                                    placeholder="Buy Amount (SOL)"
+                                                                    value={wallet.amount}
+                                                                    onChange={(e) => updateWallet(wallet.id, 'amount', e.target.value)}
+                                                                    className="w-[180px] bg-[#1a1a1a] rounded-lg p-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-400 text-sm sm:text-base"
+                                                                />
+                                                                {wallet.id !== 1 && (
+                                                                    <button 
+                                                                        onClick={() => removeWallet(wallet.id)}
+                                                                        className="min-w-[44px] h-[44px] flex items-center justify-center text-red-500 hover:text-red-400 bg-[#1a1a1a] rounded-lg ml-4"
+                                                                    >
+                                                                        ✕
+                                                                    </button>
+                                                                )}
+                                                            </div>
                                                         </div>
                                                     ))}
                                                     <button 
@@ -542,22 +544,18 @@
                                     </div>
                                 </div>
 
-                                {/* Submit Section */}
-                                <div className="mt-8 pt-6 border-t border-white/5 flex items-center justify-between">
+                                {/* Submit Section - Mobile friendly spacing */}
+                                <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-white/5 flex flex-col sm:flex-row items-start sm:items-center">
                                     <div>
                                         <button 
-                                            className="bg-purple-600 text-white px-8 py-3 rounded-lg hover:bg-purple-700 transition font-medium"
+                                            className="w-full sm:w-auto bg-purple-600 text-white px-6 sm:px-8 py-3 rounded-lg hover:bg-purple-700 transition font-medium text-sm sm:text-base"
                                             onClick={handleLaunchToken}
                                         >
                                             Launch Token
                                         </button>
-                                        <p className="text-gray-400 text-sm mt-3 font-medium">
-                                            Current fees: 0.01 SOL
+                                        <p className="text-gray-400 text-xs sm:text-sm mt-2 sm:mt-3 font-medium">
+                                            Current fees: 0.001 SOL
                                         </p>
-                                    </div>
-                                    <div className="text-right">
-                                        <p className="text-sm font-medium text-white/60">Need help?</p>
-                                        <a href="#" className="text-pink-500 hover:text-pink-400 text-sm font-medium">View Documentation →</a>
                                     </div>
                                 </div>
                             </div>

